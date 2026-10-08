@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", "Lora", Georgia, serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --color-page: #060709;
+  --color-card: #0d0f14;
+  --color-card-elevated: #13161f;
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.18);
+  --color-accent-amber: #e5af3a;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #060709;
+  color: #f4f4f6;
+  font-family: var(--font-sans);
+}
+
+body {
+  margin: 0;
+  background-color: #060709;
+  color: #f4f4f6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #060709;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+/* Focus Indicator */
+*:focus-visible {
+  outline: 2px solid rgba(229, 175, 58, 0.65);
+  outline-offset: 2px;
+}
+
+/* Editorial Typography Helpers */
+.font-editorial {
+  font-family: "Playfair Display", "Lora", Georgia, serif;
+}
+
+.font-body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Section Container Standard */
+.editorial-container {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #0d0f14;
+}
+
+@media (min-width: 640px) {
+  .editorial-container {
+    border-radius: 28px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .editorial-container {
+    max-width: 1600px;
+  }
+}
+
+/* Glass Card Surfaces */
+.editorial-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.025);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.editorial-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Animations */
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chipIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes stageIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-in {
+  animation: cardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.chip-in {
+  animation: chipIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.stage-in {
+  animation: stageIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* 3D Carousel Stage */
+.proj-stage {
+  --cw: clamp(250px, 72vw, 310px);
+  --ch: max(calc(var(--cw) * 1.48), 470px);
+}
+
+@media (min-width: 640px) {
+  .proj-stage {
+    --cw: clamp(260px, 46vw, 310px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .proj-stage {
+    --cw: clamp(270px, 27vw, 330px);
+  }
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .card-in, .chip-in, .stage-in {
+    animation: none !important;
+  }
+}

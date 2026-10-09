@@ -7,10 +7,8 @@ import {
   LuCalendar,
   LuMapPin,
   LuAward,
-  LuGraduationCap,
   LuTrophy,
   LuUsers,
-  LuBadgeCheck,
   LuCloud,
   LuServer,
   LuCodeXml,
@@ -125,45 +123,6 @@ const experience = [
   },
 ];
 
-const certifications = [
-  {
-    icon: LuBadgeCheck,
-    title: "AWS Cloud Practitioner Essentials",
-    issuer: "AWS Skill Builder",
-    detail: "Core AWS architecture, IAM security, compute (EC2), VPC networking, S3 storage, and billing.",
-  },
-  {
-    icon: LuBadgeCheck,
-    title: "AWS Solutions Architect Associate",
-    issuer: "Udemy Coursework",
-    detail: "High availability architecture, decoupled systems, serverless, and multi-tier cloud infrastructure.",
-  },
-  {
-    icon: LuBadgeCheck,
-    title: "Java 21 & Spring Boot 3 Deep Dive",
-    issuer: "Udemy",
-    detail: "Enterprise backend development, Spring Data JPA, Hibernate, RESTful APIs, and Maven.",
-  },
-  {
-    icon: LuBadgeCheck,
-    title: "Spring Security 6 & JWT Masterclass",
-    issuer: "Udemy",
-    detail: "Token-based stateless authentication, RBAC authorization filters, and secure API gateways.",
-  },
-  {
-    icon: LuBadgeCheck,
-    title: "REST APIs with Flask and Python",
-    issuer: "Udemy",
-    detail: "Lightweight microservice APIs, SQLAlchemy ORM, and Docker deployment.",
-  },
-  {
-    icon: LuBadgeCheck,
-    title: "Web Development (HTML5, CSS3, JS)",
-    issuer: "Infosys Springboard",
-    detail: "Modern semantic frontend development, responsive design, and asynchronous JavaScript.",
-  },
-];
-
 const leadershipHonors = [
   {
     icon: LuTrophy,
@@ -203,12 +162,23 @@ const leadershipHonors = [
   },
 ];
 
-const education = {
-  degree: "B.E. in Information Science and Engineering",
-  school: "Shree Devi Institute of Technology (SDIT), Mangalore",
-  period: "2022 – 2026",
-  detail: "CGPA: 8.23 / 10 · Visvesvaraya Technological University (VTU)",
-};
+const impactHighlights = [
+  {
+    metric: "99.9%",
+    label: "Infrastructure Uptime",
+    detail: "Maintained multi-region AWS cloud infrastructure across agency web applications.",
+  },
+  {
+    metric: "40%",
+    label: "Release Time Reduction",
+    detail: "Automated CI/CD pipelines with GitHub Actions, Jenkins, and Docker containers.",
+  },
+  {
+    metric: "150+",
+    label: "Students Mentored",
+    detail: "Organized technical symposiums, coding workshops, and IEEE university events as Department VP.",
+  },
+];
 
 const leadershipPhotos = [
   {
@@ -285,45 +255,6 @@ const TimelineItem = ({ item, delay }) => (
   </FadeUp>
 );
 
-const SideCard = ({ heading, entries, delay }) => (
-  <FadeUp delay={delay}>
-    <div className="h-full rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 shadow-md transition-all duration-300 hover:border-white/[0.16] hover:bg-white/[0.035] sm:p-7 md:p-8">
-      <div className="flex items-center gap-2">
-        <span className="h-1.5 w-1.5 rounded-full bg-[#e5af3a]" />
-        <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-400">
-          {heading}
-        </p>
-      </div>
-
-      <div className="mt-6 space-y-5 sm:space-y-6">
-        {entries.map((entry, i) => {
-          const Icon = entry.icon;
-          return (
-            <div key={i} className="flex gap-3.5 border-b border-white/[0.04] pb-4 sm:pb-5 last:border-0 last:pb-0">
-              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.04] text-[#e5af3a]">
-                <Icon size={15} />
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="break-words text-sm font-medium leading-5 text-white">
-                  {entry.title}
-                </p>
-                {entry.issuer && (
-                  <p className="mt-0.5 font-mono text-[11px] text-[#e5af3a]/80">
-                    {entry.issuer}
-                  </p>
-                )}
-                <p className="mt-1 text-xs leading-relaxed text-neutral-400">
-                  {entry.detail}
-                </p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  </FadeUp>
-);
-
 const Experience = () => {
   return (
     <section
@@ -348,11 +279,11 @@ const Experience = () => {
           </h2>
 
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-neutral-400 sm:mt-5 sm:text-[15px] sm:leading-7">
-            From deploying scalable cloud infrastructure at Desisle and DevOps Academy to building Java Spring Boot backends, alongside extensive university leadership as Vice President and Best Outgoing Student.
+            Hands-on work experience in cloud platform architecture, DevOps automation, and backend development, accompanied by university departmental leadership.
           </p>
         </FadeUp>
 
-        {/* Body: stacked below lg, timeline + side column from lg */}
+        {/* Body: 2 columns */}
         <div className="mt-12 grid gap-12 sm:mt-16 sm:gap-14 lg:mt-20 lg:grid-cols-[1.3fr_1fr] lg:gap-16 xl:gap-20">
 
           {/* Left Column: Timeline with continuous rail and flex gap */}
@@ -382,50 +313,80 @@ const Experience = () => {
             </div>
           </div>
 
-          {/* Right Column: Education, Certs, Leadership */}
+          {/* Right Column: Key Impact + Honors & Leadership */}
           <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12">
-            {/* Education */}
+
+            {/* Impact Highlights */}
             <FadeUp delay={0.15}>
               <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 shadow-md transition-all duration-300 hover:border-white/[0.16] hover:bg-white/[0.035] sm:p-7 md:p-8">
                 <div className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#e5af3a]" />
                   <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-400">
-                    Education
+                    Engineering Impact
                   </p>
                 </div>
 
-                <div className="mt-5 flex gap-4">
-                  <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.04] text-[#e5af3a]">
-                    <LuGraduationCap size={20} />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="break-words font-editorial text-lg font-medium text-white sm:text-xl">
-                      {education.degree}
-                    </p>
-                    <p className="mt-1 text-sm text-neutral-300">
-                      {education.school}
-                    </p>
-                    <p className="mt-2 font-mono text-xs text-[#e5af3a]">
-                      {education.period} · {education.detail}
-                    </p>
-                  </div>
+                <div className="mt-6 grid gap-4">
+                  {impactHighlights.map((stat, i) => (
+                    <div
+                      key={i}
+                      className="rounded-xl border border-white/[0.06] bg-black/40 p-4 transition-all duration-200 hover:border-[#e5af3a]/30"
+                    >
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-editorial text-2xl font-medium text-[#e5af3a]">
+                          {stat.metric}
+                        </span>
+                        <span className="text-xs font-semibold uppercase tracking-wider text-white">
+                          {stat.label}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs leading-relaxed text-neutral-400">
+                        {stat.detail}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </FadeUp>
 
-            {/* Certifications */}
-            <SideCard
-              heading="Certifications & Coursework"
-              entries={certifications}
-              delay={0.2}
-            />
-
             {/* Leadership & Honors */}
-            <SideCard
-              heading="Honors & Leadership Roles"
-              entries={leadershipHonors}
-              delay={0.25}
-            />
+            <FadeUp delay={0.25}>
+              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 shadow-md transition-all duration-300 hover:border-white/[0.16] hover:bg-white/[0.035] sm:p-7 md:p-8">
+                <div className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#e5af3a]" />
+                  <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-400">
+                    Honors &amp; Department Leadership
+                  </p>
+                </div>
+
+                <div className="mt-6 space-y-5 sm:space-y-6">
+                  {leadershipHonors.map((entry, i) => {
+                    const Icon = entry.icon;
+                    return (
+                      <div key={i} className="flex gap-3.5 border-b border-white/[0.04] pb-4 sm:pb-5 last:border-0 last:pb-0">
+                        <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.04] text-[#e5af3a]">
+                          <Icon size={15} />
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <p className="break-words text-sm font-medium leading-5 text-white">
+                            {entry.title}
+                          </p>
+                          {entry.issuer && (
+                            <p className="mt-0.5 font-mono text-[11px] text-[#e5af3a]/80">
+                              {entry.issuer}
+                            </p>
+                          )}
+                          <p className="mt-1 text-xs leading-relaxed text-neutral-400">
+                            {entry.detail}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </FadeUp>
+
           </div>
 
         </div>

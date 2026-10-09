@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FadeUp from "../components/FadeUp";
 
 import {
@@ -15,6 +15,7 @@ import { TbSql } from "react-icons/tb";
 import {
   LuServer, LuNetwork, LuSplit, LuDatabase, LuBellRing, LuWebhook, LuBox,
   LuArrowLeft, LuArrowRight, LuArrowUpRight, LuBrain, LuShieldCheck, LuCheck,
+  LuPlay, LuPause,
 } from "react-icons/lu";
 import { Link } from "react-router-dom";
 
@@ -71,14 +72,14 @@ const projects = {
   devops: {
     label: "Platform & DevOps",
     blurb:
-      "Infrastructure as Code, automated CI/CD pipelines, container platforms, and security auditing tools.",
+      "Infrastructure automation, continuous delivery pipelines, container platforms, and security auditing tools.",
     items: [
       {
         id: "cloudforge-terraform",
-        title: "CloudForge — Terraform Cloud & GitHub IaC Pipeline",
-        tag: "IaC & Cloud Automation",
+        title: "CloudForge — Infrastructure Pipeline",
+        tag: "Cloud Infrastructure",
         description:
-          "Automated Infrastructure-as-Code pipeline integrating GitHub repository webhooks with Terraform Cloud workspaces. Automates speculative execution plans, state locking, drift detection, and multi-environment AWS provisioning.",
+          "Automated cloud provisioning platform that executes speculative plan validation, manages state concurrency locking, and detects configuration drift to reliably maintain multi-tier cloud environments without manual intervention.",
         stack: ["Terraform", "AWS", "GitHub Actions", "Docker", "Linux"],
         art: ["#a26ee0", "#ff9900", "#2088ff"],
         repo: "https://github.com/ajazjamadar/Terraform-cloud-GitHub",
@@ -86,10 +87,10 @@ const projects = {
       },
       {
         id: "ansibleflow-cicd",
-        title: "AnsibleFlow — Configuration Management & CI/CD Pipeline",
-        tag: "Ansible & Server Orchestration",
+        title: "AnsibleFlow — Configuration Orchestrator",
+        tag: "Server Automation",
         description:
-          "Continuous configuration and delivery automation using Ansible playbooks. Provisions server nodes, orchestrates package dependencies, automates firewall configurations, and deploys containerized applications with zero downtime.",
+          "Centralized server management and deployment framework that automates remote host provisioning, orchestrates software dependencies, and hardens production nodes with zero downtime.",
         stack: ["Ansible", "Linux", "Docker", "Bash Scripting", "Jenkins"],
         art: ["#ee3b3b", "#fcc624", "#2496ed"],
         repo: "https://github.com/ajazjamadar/ansible-ci-cd",
@@ -97,10 +98,10 @@ const projects = {
       },
       {
         id: "auditx-scanner",
-        title: "AuditX — Automated Security & Web Audit Platform",
-        tag: "Security & Performance Scanner",
+        title: "AuditX — Web Vulnerability & Quality Scanner",
+        tag: "Security & Auditing",
         description:
-          "Automated website audit engine with modular analyzers for OWASP top-10 security vulnerabilities, Core Web Vitals performance benchmarks, SEO health, and WCAG accessibility compliance with automated report generation.",
+          "Automated website inspection engine that analyzes web endpoints for OWASP Top 10 vulnerabilities, diagnoses Core Web Vitals performance regressions, and scores accessibility compliance.",
         stack: ["TypeScript", "Node.js", "Express", "Docker", "Linux"],
         art: ["#3178c6", "#68a063", "#2496ed"],
         repo: "https://github.com/ajazjamadar/AuditX",
@@ -112,14 +113,14 @@ const projects = {
   development: {
     label: "Software & Systems",
     blurb:
-      "Enterprise Java microservices, recruitment platforms, real-time WebSocket communication, and predictive machine learning engines.",
+      "Enterprise full-stack platforms, personal finance engines, real-time communications, and predictive analytics systems.",
     items: [
       {
         id: "nexthire",
-        title: "NextHire — Enterprise Job Portal & Recruitment Platform",
-        tag: "Java 21, Spring Boot & React 19",
+        title: "NextHire — Job Portal & Recruitment Platform",
+        tag: "Recruitment Portal",
         description:
-          "Production-grade full-stack recruitment portal built with Java 21, Spring Boot 3.2.5, MongoDB, and React 19. Features JWT authentication with OTP verification, role-based access control (RBAC), intelligent job search, applicant tracking, and comprehensive REST APIs.",
+          "Full-cycle hiring marketplace connecting job seekers with recruiters, featuring multi-criteria candidate search, resume document indexing, two-factor OTP authentication, and application stage tracking.",
         stack: ["Java", "Spring Boot", "React", "MongoDB", "JWT", "Docker"],
         art: ["#f89820", "#6db33f", "#61dafb"],
         repo: "https://github.com/ajazjamadar/NextHire",
@@ -127,10 +128,10 @@ const projects = {
       },
       {
         id: "fintrack",
-        title: "FinTrack — Personal Finance & Mini-Banking Engine",
-        tag: "Enterprise Java & Clean Architecture",
+        title: "FinTrack — Personal Finance & Banking Platform",
+        tag: "Banking & Ledger",
         description:
-          "Mini-banking proof-of-concept designed with clean layered architecture (Controller, Service Interface, Implementation, Repository). Features bank account management, fund transfers, transaction auditing, UPI/mobile ledger tracking, and real-time financial reporting.",
+          "Personal finance and mini-banking solution enabling users to maintain multi-account balances, process internal and external fund transfers, audit ledger transactions, and track expense trends.",
         stack: ["Java", "Spring Boot", "MySQL", "REST API", "Docker"],
         art: ["#f89820", "#6db33f", "#4a9fd0"],
         repo: "https://github.com/ajazjamadar/Personal-Finance-Tracker",
@@ -138,10 +139,10 @@ const projects = {
       },
       {
         id: "talentpulse-ems",
-        title: "TalentPulse — Enterprise Employee Management System",
-        tag: "Java 21 & SOLID Architecture",
+        title: "TalentPulse — Employee Management Platform",
+        tag: "Enterprise HRMS",
         description:
-          "Enterprise-grade employee and organizational management system refactored to 100% SOLID compliance and clean architecture. Engineered with Dependency Injection, custom validation annotations, Jenkinsfile CI/CD automation, SLF4J logging, and Apache Maven build lifecycle.",
+          "Enterprise workforce management system built on strict SOLID design patterns, providing department hierarchy organization, annotation-based employee record validation, and automated reporting.",
         stack: ["Java", "Maven", "Jenkins", "SQL", "JUnit 5"],
         art: ["#f89820", "#e0304f", "#d24939"],
         repo: "https://github.com/ajazjamadar/Employee-Management-System",
@@ -149,10 +150,10 @@ const projects = {
       },
       {
         id: "mindpulse-stress",
-        title: "MindPulse — Workplace Stress Prediction & Analytics Engine",
-        tag: "Machine Learning & Python",
+        title: "MindPulse — Workplace Stress Prediction Engine",
+        tag: "Predictive Analytics",
         description:
-          "Predictive machine learning pipeline that forecasts workplace stress levels by analyzing multi-factor workplace parameters (workload, hours, mental health indicators). Implements Scikit-learn Random Forest and Logistic Regression models with high accuracy and visual reporting.",
+          "Predictive organizational health platform that evaluates workplace stress indicators across workload, scheduling, and job satisfaction to forecast burnout risks and surface proactive insights.",
         stack: ["Python", "Machine Learning", "Scikit-Learn", "Flask"],
         art: ["#4b8bbe", "#a78bfa", "#f7931e"],
         repo: "https://github.com/ajazjamadar/Employee-Stress-Prediction",
@@ -160,10 +161,10 @@ const projects = {
       },
       {
         id: "pulsechat",
-        title: "PulseChat — Real-Time WebSocket Communication Platform",
-        tag: "WebSockets & Real-Time Networking",
+        title: "PulseChat — Real-Time Messaging Platform",
+        tag: "Instant Communication",
         description:
-          "Full-duplex messaging platform engineered with Socket.IO and WebSockets in modern JavaScript (ES6). Supports persistent one-on-one private messaging channels, public broadcast rooms, online status telemetry, and instant message delivery.",
+          "Full-duplex real-time chat application facilitating low-latency one-on-one direct messaging, public topic rooms, live typing presence, and instant message delivery notifications.",
         stack: ["JavaScript", "Node.js", "Express", "REST API", "Tailwind"],
         art: ["#f7df1e", "#68a063", "#06b6d4"],
         repo: "https://github.com/ajazjamadar/REAL-TIME-CHAT-APPLICATION-ONLINE",
@@ -172,9 +173,9 @@ const projects = {
       {
         id: "trackify-jobs",
         title: "Trackify — Job Application Intelligence Tracker",
-        tag: "Python & RESTful Automation",
+        tag: "Application Workflow",
         description:
-          "Web application for tracking job recruitment pipelines end-to-end. Built with Flask, featuring secure authentication, CRUD lifecycle management, REST API endpoints, automated interview reminders, and cloud deployment.",
+          "Personal recruitment pipeline manager designed to log interview milestones, track offer stages, schedule follow-up reminders, and organize correspondence for career opportunities.",
         stack: ["Python", "Flask", "REST API", "SQL", "Docker"],
         art: ["#4b8bbe", "#ffffff", "#38bdf8"],
         repo: "https://github.com/ajazjamadar/Job-Tracker-Application",
@@ -189,6 +190,8 @@ const projects = {
 const Projects = () => {
   const [tab, setTab] = useState("development");
   const [index, setIndex] = useState(0);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
 
   const containerRef = useRef(null);
   const dragStart = useRef(0);
@@ -206,6 +209,19 @@ const Projects = () => {
 
   const next = () => setIndex((i) => (i + 1) % count);
   const prev = () => setIndex((i) => (i - 1 + count) % count);
+
+  // Auto-scroll effect: advances every 3.8s, pauses on hover or user drag
+  useEffect(() => {
+    if (!isAutoScrolling || isHovered) return;
+
+    const timer = setInterval(() => {
+      if (!isDragging.current) {
+        setIndex((prevIndex) => (prevIndex + 1) % count);
+      }
+    }, 3800);
+
+    return () => clearInterval(timer);
+  }, [isAutoScrolling, isHovered, count]);
 
   // drag / swipe
   const onDown = (e) => {
@@ -283,30 +299,50 @@ const Projects = () => {
               </p>
             </div>
 
-            {/* Pill Tab Switcher */}
-            <div className="flex w-fit items-center rounded-full border border-white/[0.08] bg-white/[0.02] p-1 shadow-sm">
-              {Object.entries(projects).map(([k, v]) => {
-                const isCur = tab === k;
-                return (
-                  <button
-                    key={k}
-                    onClick={() => switchTab(k)}
-                    className={`relative rounded-full px-4 py-1.5 text-xs font-medium tracking-wide transition-all duration-300 ${
-                      isCur
-                        ? "bg-[#e5af3a] text-black shadow-sm"
-                        : "text-neutral-400 hover:text-white"
-                    }`}
-                  >
-                    {v.label}
-                  </button>
-                );
-              })}
+            {/* Pill Tab Switcher + Auto Scroll Toggle */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <button
+                onClick={() => setIsAutoScrolling(!isAutoScrolling)}
+                aria-label={isAutoScrolling ? "Pause auto-scroll" : "Resume auto-scroll"}
+                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-all duration-300 ${
+                  isAutoScrolling
+                    ? "border-[#e5af3a]/40 bg-[#e5af3a]/10 text-[#e5af3a]"
+                    : "border-white/10 bg-white/[0.03] text-neutral-400 hover:text-white"
+                }`}
+                title={isAutoScrolling ? "Click to pause auto-scroll" : "Click to resume auto-scroll"}
+              >
+                {isAutoScrolling ? <LuPause size={12} /> : <LuPlay size={12} />}
+                <span>{isAutoScrolling ? "Auto-Scroll: On" : "Auto-Scroll: Off"}</span>
+              </button>
+
+              <div className="flex w-fit items-center rounded-full border border-white/[0.08] bg-white/[0.02] p-1 shadow-sm">
+                {Object.entries(projects).map(([k, v]) => {
+                  const isCur = tab === k;
+                  return (
+                    <button
+                      key={k}
+                      onClick={() => switchTab(k)}
+                      className={`relative rounded-full px-4 py-1.5 text-xs font-medium tracking-wide transition-all duration-300 ${
+                        isCur
+                          ? "bg-[#e5af3a] text-black shadow-sm"
+                          : "text-neutral-400 hover:text-white"
+                      }`}
+                    >
+                      {v.label}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </FadeUp>
 
-        {/* 3D Stage */}
-        <div className="relative mt-8 sm:mt-12 lg:mt-14">
+        {/* 3D Stage with Hover Pause */}
+        <div
+          className="relative mt-8 sm:mt-12 lg:mt-14"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           <div
             ref={containerRef}
             onMouseDown={onDown}
@@ -318,6 +354,9 @@ const Projects = () => {
           >
             {list.map((p, i) => {
               const isCenter = i === index;
+              // Ensure skills are unique and mentioned only once
+              const uniqueStack = Array.from(new Set(p.stack));
+
               return (
                 <div
                   key={p.id}
@@ -355,14 +394,14 @@ const Projects = () => {
                       {p.title}
                     </h3>
 
-                    {/* Description */}
+                    {/* Description: Defines what the project is about */}
                     <p className="relative mt-2 line-clamp-3 text-xs leading-relaxed text-neutral-400 sm:text-[13px] sm:leading-6">
                       {p.description}
                     </p>
 
-                    {/* Stack chips */}
+                    {/* Stack chips: Technologies mentioned only once */}
                     <div className="relative mt-5 flex flex-wrap gap-1.5 sm:mt-6">
-                      {p.stack.map((name) => {
+                      {uniqueStack.map((name) => {
                         const [Icon, color] = tech(name);
                         return (
                           <span

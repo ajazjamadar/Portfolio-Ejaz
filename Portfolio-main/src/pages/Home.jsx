@@ -4,6 +4,7 @@ import Projects from "../sections/Project";
 import Skills from "../sections/Skill";
 import Education from "../sections/Education";
 import Certification from "../sections/Certification";
+import HonorsLeadership from "../sections/HonorsLeadership";
 import About from "../sections/About";
 
 export default function Home() {
@@ -27,7 +28,10 @@ export default function Home() {
       {/* 6th: Certifications section (separate card before about) */}
       <Certification />
 
-      {/* 7th: About section */}
+      {/* 7th: Honors & Department Leadership section (separate card before about) */}
+      <HonorsLeadership />
+
+      {/* 8th: About section */}
       <About />
     </>
   );

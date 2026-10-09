@@ -22,13 +22,13 @@ const coursework = [
 const highlights = [
   {
     icon: LuAward,
-    title: "Best Outgoing Student Award (2022–2026)",
-    detail: "Awarded for exceptional academic performance, technical initiatives, and department leadership.",
+    title: "First Class with Distinction Track",
+    detail: "Maintained a strong 8.23 / 10 cumulative grade point average across core computer science and engineering semesters.",
   },
   {
     icon: LuSparkles,
-    title: "Department Vice President (2025–2026)",
-    detail: "Led technical symposiums, coding hackathons, and student workshops for the ISE department.",
+    title: "Engineering Capstone & Applied Projects",
+    detail: "Focused final-year coursework on distributed systems, enterprise cloud architectures, and container orchestration.",
   },
 ];
 
@@ -148,7 +148,7 @@ const Education = () => {
                 </div>
 
                 <h3 className="mt-4 font-editorial text-xl font-medium text-white sm:text-2xl">
-                  Key Honors &amp; Department Roles
+                  Academic Distinction &amp; Focus
                 </h3>
 
                 <div className="mt-6 space-y-6">

@@ -2,18 +2,40 @@ import { useEffect, useRef, useState } from "react";
 import FadeUp from "../components/FadeUp";
 
 import {
-  SiLinux, SiGnubash, SiGit, SiGithub, SiDocker, SiKubernetes,
-  SiTerraform, SiAnsible, SiJenkins, SiApachemaven,
-  SiPrometheus, SiGrafana, SiReact, SiJavascript, SiHtml5, SiCss,
-  SiTailwindcss, SiPython, SiC, SiMongodb, SiMysql, SiPostgresql,
-  SiSpringboot, SiNginx, SiGitlab,
+  SiLinux,
+  SiGnubash,
+  SiGit,
+  SiGithub,
+  SiGitlab,
+  SiDocker,
+  SiKubernetes,
+  SiTerraform,
+  SiAnsible,
+  SiJenkins,
+  SiReact,
+  SiTailwindcss,
+  SiSpringboot,
+  SiPython,
+  SiFlask,
+  SiMongodb,
+  SiFlyway,
 } from "react-icons/si";
 import { FaAws, FaJava } from "react-icons/fa";
 import { TbLambda, TbSql } from "react-icons/tb";
 import {
-  LuWorkflow, LuCloud, LuLayoutDashboard, LuServerCog, LuCode, LuDatabase,
-  LuServer, LuNetwork, LuSplit, LuMaximize, LuArchive, LuRoute,
-  LuKeyRound, LuActivity, LuWebhook, LuRadio,
+  LuWorkflow,
+  LuCloud,
+  LuCodeXml,
+  LuDatabase,
+  LuServer,
+  LuNetwork,
+  LuSplit,
+  LuMaximize,
+  LuArchive,
+  LuRoute,
+  LuKeyRound,
+  LuActivity,
+  LuRadio,
 } from "react-icons/lu";
 
 /* name, icon, brand color (tuned to read on dark editorial background) */
@@ -37,7 +59,7 @@ const skillCategories = [
     icon: LuWorkflow,
     skills: [
       s("Linux", SiLinux, "#fcc624"),
-      s("Shell Scripting", SiGnubash, "#4eaa25"),
+      s("Bash Scripting", SiGnubash, "#4eaa25"),
       s("Git", SiGit, "#f05032"),
       s("GitHub", SiGithub, "#ffffff"),
       s("GitLab", SiGitlab, "#fc6d26"),
@@ -47,10 +69,6 @@ const skillCategories = [
       s("Terraform", SiTerraform, "#a26ee0"),
       s("Ansible", SiAnsible, "#ee3b3b"),
       s("Jenkins", SiJenkins, "#d24939"),
-      s("Maven", SiApachemaven, "#e0304f"),
-      s("Nginx", SiNginx, "#009639"),
-      s("Prometheus", SiPrometheus, "#e6522c"),
-      s("Grafana", SiGrafana, "#f46800"),
       s("PagerDuty", LuRadio, "#00ad43"),
     ],
   },
@@ -74,52 +92,36 @@ const skillCategories = [
     ],
   },
   {
-    title: "Frontend",
-    description: "Modern responsive web interfaces",
-    icon: LuLayoutDashboard,
-    skills: [
-      s("React.js", SiReact, "#61dafb"),
-      s("JavaScript", SiJavascript, "#f7df1e"),
-      s("HTML5", SiHtml5, "#e34f26"),
-      s("CSS3", SiCss, "#3d9be9"),
-      s("Tailwind CSS", SiTailwindcss, "#06b6d4"),
-    ],
-  },
-  {
-    title: "Backend",
-    description: "Enterprise Java & Spring Boot microservices",
-    icon: LuServerCog,
-    skills: [
-      s("Java 21", FaJava, "#f89820"),
-      s("Spring Boot", SiSpringboot, "#6db33f"),
-      s("Spring Security", SiSpringboot, "#6db33f"),
-      s("Python", SiPython, "#4b8bbe"),
-      s("Flask", LuServerCog, "#ffffff"),
-      s("RESTful APIs", LuWebhook, "#a78bfa"),
-      s("Tomcat", LuServer, "#f89820"),
-    ],
-  },
-  {
-    title: "Programming",
-    description: "Languages & scripting",
-    icon: LuCode,
-    skills: [
-      s("Java", FaJava, "#f89820"),
-      s("Python", SiPython, "#4b8bbe"),
-      s("Bash Scripting", SiGnubash, "#4eaa25"),
-      s("C", SiC, "#a8b9cc"),
+    title: "Development",
+    description: "Frontend interface engineering & backend microservices",
+    icon: LuCodeXml,
+    groups: [
+      {
+        name: "Frontend",
+        skills: [
+          s("React.js", SiReact, "#61dafb"),
+          s("Tailwind CSS", SiTailwindcss, "#06b6d4"),
+        ],
+      },
+      {
+        name: "Backend",
+        skills: [
+          s("Java", FaJava, "#f89820"),
+          s("Spring Boot", SiSpringboot, "#6db33f"),
+          s("Python", SiPython, "#4b8bbe"),
+          s("Flask", SiFlask, "#ffffff"),
+        ],
+      },
     ],
   },
   {
     title: "Database",
-    description: "Data storage & migration management",
+    description: "Data storage, relational queries & schema migrations",
     icon: LuDatabase,
     skills: [
-      s("MySQL", SiMysql, "#4a9fd0"),
-      s("PostgreSQL", SiPostgresql, "#4169e1"),
-      s("MongoDB", SiMongodb, "#47a248"),
-      s("Flyway", LuDatabase, "#cc0000"),
       s("SQL", TbSql, "#38bdf8"),
+      s("MongoDB", SiMongodb, "#47a248"),
+      s("Flyway", SiFlyway, "#cc0000"),
     ],
   },
 ];
@@ -148,9 +150,36 @@ const useInView = (threshold = 0.15) => {
   return [ref, visible];
 };
 
+const renderChip = (skill, i, delay, visible) => {
+  const SkillIcon = skill.icon;
+  return (
+    <span
+      key={skill.name}
+      style={{
+        "--c": skill.color,
+        animationDelay: `${delay + 150 + i * 35}ms`,
+      }}
+      className={`group inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-white/[0.03] px-2.5 py-1.5 text-xs text-neutral-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-[color-mix(in_srgb,var(--c)_50%,transparent)] hover:bg-[color-mix(in_srgb,var(--c)_12%,transparent)] hover:text-white hover:shadow-[0_8px_20px_-10px_var(--c)] sm:gap-2 sm:px-3 sm:py-2 sm:text-[13px] ${
+        visible ? "chip-in" : "opacity-0"
+      }`}
+    >
+      <SkillIcon
+        size={15}
+        style={{ color: skill.color }}
+        className="shrink-0 transition-transform duration-300 group-hover:scale-115"
+      />
+      {skill.name}
+    </span>
+  );
+};
+
 const SkillCard = ({ category, className = "", delay = 0 }) => {
   const [ref, visible] = useInView(0.05);
   const Icon = category.icon;
+
+  const count = category.skills
+    ? category.skills.length
+    : category.groups.reduce((acc, g) => acc + g.skills.length, 0);
 
   const handleMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -196,43 +225,43 @@ const SkillCard = ({ category, className = "", delay = 0 }) => {
           </div>
 
           <span className="shrink-0 rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[11px] font-mono text-neutral-400">
-            {category.skills.length}
+            {count}
           </span>
         </div>
 
-        {/* Skill chips */}
-        <div className="mt-5 flex flex-wrap gap-1.5 sm:mt-6 sm:gap-2">
-          {category.skills.map((skill, i) => {
-            const SkillIcon = skill.icon;
-            return (
-              <span
-                key={skill.name}
-                style={{
-                  "--c": skill.color,
-                  animationDelay: `${delay + 150 + i * 35}ms`,
-                }}
-                className={`group inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-white/[0.03] px-2.5 py-1.5 text-xs text-neutral-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-[color-mix(in_srgb,var(--c)_50%,transparent)] hover:bg-[color-mix(in_srgb,var(--c)_12%,transparent)] hover:text-white hover:shadow-[0_8px_20px_-10px_var(--c)] sm:gap-2 sm:px-3 sm:py-2 sm:text-[13px] ${
-                  visible ? "chip-in" : "opacity-0"
-                }`}
-              >
-                <SkillIcon
-                  size={15}
-                  style={{ color: skill.color }}
-                  className="shrink-0 transition-transform duration-300 group-hover:scale-115"
-                />
-                {skill.name}
-              </span>
-            );
-          })}
-        </div>
+        {/* Skill chips or grouped layout */}
+        {category.groups ? (
+          <div className="mt-5 space-y-4 sm:mt-6">
+            {category.groups.map((group, gIdx) => (
+              <div key={group.name}>
+                <div className="flex items-center gap-2">
+                  <span className="h-1 w-1 rounded-full bg-[#e5af3a]/70" />
+                  <span className="font-mono text-[11px] font-medium uppercase tracking-wider text-neutral-400">
+                    {group.name}
+                  </span>
+                </div>
+                <div className="mt-2 flex flex-wrap gap-1.5 sm:gap-2">
+                  {group.skills.map((skill, i) =>
+                    renderChip(skill, gIdx * 10 + i, delay, visible)
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="mt-5 flex flex-wrap gap-1.5 sm:mt-6 sm:gap-2">
+            {category.skills.map((skill, i) =>
+              renderChip(skill, i, delay, visible)
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 const Skills = () => {
-  const [devops, cloud, frontend, backend, programming, database] =
-    skillCategories;
+  const [devops, cloud, development, database] = skillCategories;
 
   return (
     <section
@@ -240,7 +269,6 @@ const Skills = () => {
       className="overflow-x-hidden bg-[#060709] px-2 py-2 text-white min-[400px]:px-3 min-[400px]:py-3 sm:px-6 sm:py-3"
     >
       <div className="mx-auto max-w-7xl rounded-2xl border border-white/[0.08] bg-[#0c0e14] px-5 py-10 min-[400px]:px-7 sm:rounded-[28px] sm:px-10 sm:py-16 lg:px-16 lg:py-20 2xl:max-w-[1600px]">
-
         {/* Header */}
         <FadeUp>
           <div className="flex items-center gap-2">
@@ -253,32 +281,23 @@ const Skills = () => {
           <h2 className="mt-4 font-editorial text-3xl font-medium leading-[1.08] tracking-tight min-[400px]:text-4xl sm:text-5xl lg:text-[56px]">
             Technologies
             <br />
-            <span className="font-normal italic text-neutral-400">I work with</span>
+            <span className="font-normal italic text-neutral-400">
+              I work with
+            </span>
           </h2>
 
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-neutral-400 sm:mt-5 sm:text-[15px] sm:leading-7">
-            Tools I use across software development, cloud infrastructure,
-            automation, CI/CD, and deployment.
+            Focused toolsets across platform engineering, cloud operations, full-stack development, and data stores.
           </p>
         </FadeUp>
 
-        {/* Bento grid */}
-        <div className="mt-8 grid grid-cols-1 gap-3 sm:mt-12 sm:gap-4 md:grid-cols-2 lg:mt-16 lg:grid-cols-6">
-          <SkillCard category={devops} className="md:col-span-2 lg:col-span-4" />
-
-          <div className="flex min-w-0 flex-col gap-3 sm:gap-4 md:col-span-2 md:flex-row lg:col-span-2 lg:flex-col">
-            <SkillCard category={frontend} delay={100} className="flex-1" />
-            <SkillCard category={backend} delay={200} className="flex-1" />
-          </div>
-
-          <SkillCard category={cloud} delay={100} className="md:col-span-2 lg:col-span-4" />
-
-          <div className="flex min-w-0 flex-col gap-3 sm:gap-4 md:col-span-2 md:flex-row lg:col-span-2 lg:flex-col">
-            <SkillCard category={programming} delay={100} className="flex-1" />
-            <SkillCard category={database} delay={200} className="flex-1" />
-          </div>
+        {/* Minimal 2x2 Bento grid */}
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-12 sm:gap-6 md:grid-cols-2 lg:mt-16">
+          <SkillCard category={devops} delay={0} />
+          <SkillCard category={cloud} delay={100} />
+          <SkillCard category={development} delay={150} />
+          <SkillCard category={database} delay={200} />
         </div>
-
       </div>
     </section>
   );

@@ -210,7 +210,7 @@ const Projects = () => {
   const next = () => setIndex((i) => (i + 1) % count);
   const prev = () => setIndex((i) => (i - 1 + count) % count);
 
-  // Auto-scroll effect: advances every 3.8s, pauses on hover or user drag
+  // Auto-scroll effect: advances every 2.4s, pauses on hover or user drag
   useEffect(() => {
     if (!isAutoScrolling || isHovered) return;
 
@@ -218,7 +218,7 @@ const Projects = () => {
       if (!isDragging.current) {
         setIndex((prevIndex) => (prevIndex + 1) % count);
       }
-    }, 3800);
+    }, 2400);
 
     return () => clearInterval(timer);
   }, [isAutoScrolling, isHovered, count]);
@@ -256,7 +256,7 @@ const Projects = () => {
       opacity: visible ? opacity : 0,
       pointerEvents: offset === 0 ? "auto" : "none",
       zIndex: 10 - Math.abs(offset),
-      transition: "all 0.55s cubic-bezier(0.2, 0.8, 0.2, 1)",
+      transition: "all 0.45s cubic-bezier(0.2, 0.8, 0.2, 1)",
     };
   };
 

@@ -1,19 +1,16 @@
 import FadeUp from "../components/FadeUp";
-import speechImg1 from "../assets/leadership-speaking-1.jpg";
-import speechImg2 from "../assets/leadership-speaking-2.jpg";
-import speechImg3 from "../assets/leadership-speaking-3.jpg";
 import {
   LuBriefcase,
   LuCalendar,
   LuMapPin,
   LuAward,
-  LuTrophy,
-  LuUsers,
   LuCloud,
   LuServer,
   LuCodeXml,
   LuTerminal,
-  LuMic,
+  LuWorkflow,
+  LuShieldCheck,
+  LuCpu,
 } from "react-icons/lu";
 
 /* ------------------------------------------------------------------
@@ -123,45 +120,6 @@ const experience = [
   },
 ];
 
-const leadershipHonors = [
-  {
-    icon: LuTrophy,
-    title: "Best Outgoing Student Award (2022–2026)",
-    issuer: "Dept. of Information Science & Engineering, SDIT",
-    detail: "Awarded for exceptional academic excellence, technical contributions, and departmental leadership.",
-  },
-  {
-    icon: LuUsers,
-    title: "Vice President — Dept. of ISE (2025–2026)",
-    issuer: "Shree Devi Institute of Technology",
-    detail: "Led departmental technical symposiums, hackathons, and student coding workshops across the college.",
-  },
-  {
-    icon: LuUsers,
-    title: "General Secretary & Joint Secretary — Dept. of ISE",
-    issuer: "SDIT (2023–2025)",
-    detail: "Spearheaded student outreach, guest lectures, and industry connect sessions for 2 consecutive terms.",
-  },
-  {
-    icon: LuMic,
-    title: "Media & Publicity Head — SDIT IEEE Student Chapter",
-    issuer: "IEEE Chapter (2024–2026)",
-    detail: "Managed publicity campaigns, technical conference promotions, and digital outreach for university events.",
-  },
-  {
-    icon: LuAward,
-    title: "Hack Yugma Hackathon (2025) Finalist",
-    issuer: "Cybersecurity Solution Track",
-    detail: "Built and demonstrated an automated vulnerability and auditing solution under competition constraints.",
-  },
-  {
-    icon: LuTrophy,
-    title: "2nd Place — Intra-College Technical Quiz & Mind Matrix",
-    issuer: "Sankalp 2025",
-    detail: "Recognized among top teams in computer architecture, networking, and algorithms.",
-  },
-];
-
 const impactHighlights = [
   {
     metric: "99.9%",
@@ -180,21 +138,26 @@ const impactHighlights = [
   },
 ];
 
-const leadershipPhotos = [
+const corePractices = [
   {
-    src: speechImg1,
-    title: "Department Leadership Address",
-    subtitle: "Addressing students and faculty at SDIT symposium",
+    icon: LuCloud,
+    title: "Infrastructure as Code",
+    detail: "Declarative cloud provisioning with Terraform and automated AWS state management.",
   },
   {
-    src: speechImg2,
-    title: "Technical Conference & Stage Speech",
-    subtitle: "Delivering welcome and technical keynote address",
+    icon: LuWorkflow,
+    title: "Continuous Delivery",
+    detail: "Automated test-build-deploy pipelines using GitHub Actions, Jenkins, and container images.",
   },
   {
-    src: speechImg3,
-    title: "Student Mentorship & Event Coordination",
-    subtitle: "Coordinating technical sessions and panel discussions",
+    icon: LuCpu,
+    title: "Resilient Microservices",
+    detail: "Modular backend services built with Java 21, Spring Boot 3, Python Flask, and secure RBAC.",
+  },
+  {
+    icon: LuShieldCheck,
+    title: "Production Observability",
+    detail: "Full-stack monitoring, telemetry metrics, and centralized logging across cloud environments.",
   },
 ];
 
@@ -263,23 +226,23 @@ const Experience = () => {
     >
       <div className="mx-auto max-w-7xl rounded-2xl border border-white/[0.08] bg-[#0c0e14] px-5 py-12 min-[400px]:px-7 sm:rounded-[28px] sm:px-12 sm:py-20 lg:px-16 lg:py-24 2xl:max-w-[1600px]">
 
-        {/* Header */}
+        {/* Section Header */}
         <FadeUp>
           <div className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-[#e5af3a]" />
             <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-400">
-              Career &amp; Leadership
+              Career Journey
             </span>
           </div>
 
           <h2 className="mt-4 max-w-2xl font-editorial text-3xl font-medium leading-[1.08] tracking-tight min-[400px]:text-4xl sm:text-5xl lg:text-[56px]">
             Where I've
             <br />
-            <span className="font-normal italic text-neutral-400">engineered, led & delivered</span>
+            <span className="font-normal italic text-neutral-400">engineered, deployed & scaled</span>
           </h2>
 
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-neutral-400 sm:mt-5 sm:text-[15px] sm:leading-7">
-            Hands-on work experience in cloud platform architecture, DevOps automation, and backend development, accompanied by university departmental leadership.
+            Hands-on work experience in cloud platform architecture, DevOps automation, and backend development across production agency systems.
           </p>
         </FadeUp>
 
@@ -313,7 +276,7 @@ const Experience = () => {
             </div>
           </div>
 
-          {/* Right Column: Key Impact + Honors & Leadership */}
+          {/* Right Column: Key Impact + Core Engineering Focus */}
           <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12">
 
             {/* Impact Highlights */}
@@ -349,35 +312,33 @@ const Experience = () => {
               </div>
             </FadeUp>
 
-            {/* Leadership & Honors */}
+            {/* Core Platform Practices */}
             <FadeUp delay={0.25}>
               <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 shadow-md transition-all duration-300 hover:border-white/[0.16] hover:bg-white/[0.035] sm:p-7 md:p-8">
                 <div className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#e5af3a]" />
                   <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-400">
-                    Honors &amp; Department Leadership
+                    Platform Engineering Tenets
                   </p>
                 </div>
 
-                <div className="mt-6 space-y-5 sm:space-y-6">
-                  {leadershipHonors.map((entry, i) => {
-                    const Icon = entry.icon;
+                <div className="mt-6 space-y-4">
+                  {corePractices.map((practice, i) => {
+                    const Icon = practice.icon;
                     return (
-                      <div key={i} className="flex gap-3.5 border-b border-white/[0.04] pb-4 sm:pb-5 last:border-0 last:pb-0">
+                      <div
+                        key={i}
+                        className="flex gap-3.5 border-b border-white/[0.04] pb-4 sm:pb-4.5 last:border-0 last:pb-0"
+                      >
                         <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.04] text-[#e5af3a]">
                           <Icon size={15} />
                         </span>
                         <div className="min-w-0 flex-1">
-                          <p className="break-words text-sm font-medium leading-5 text-white">
-                            {entry.title}
+                          <p className="text-sm font-medium leading-5 text-white">
+                            {practice.title}
                           </p>
-                          {entry.issuer && (
-                            <p className="mt-0.5 font-mono text-[11px] text-[#e5af3a]/80">
-                              {entry.issuer}
-                            </p>
-                          )}
                           <p className="mt-1 text-xs leading-relaxed text-neutral-400">
-                            {entry.detail}
+                            {practice.detail}
                           </p>
                         </div>
                       </div>
@@ -389,58 +350,6 @@ const Experience = () => {
 
           </div>
 
-        </div>
-
-        {/* Leadership & Speaking Highlights Photo Section */}
-        <div className="mt-24 border-t border-white/[0.08] pt-16 sm:mt-32 sm:pt-20 lg:mt-36 lg:pt-24">
-          <FadeUp>
-            <div className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#e5af3a]" />
-              <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-400">
-                Leadership In Action
-              </span>
-            </div>
-            <div className="mt-4 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-              <div>
-                <h3 className="font-editorial text-2xl font-medium text-white sm:text-3xl lg:text-4xl">
-                  Campus Speaking &amp; <span className="italic text-neutral-400">Public Addresses</span>
-                </h3>
-                <p className="mt-2 max-w-xl text-sm text-neutral-400">
-                  Keynote addresses, department inauguration speeches, and technical coordination at Shree Devi Institute of Technology.
-                </p>
-              </div>
-              <span className="inline-flex items-center gap-2 self-start rounded-full border border-white/[0.08] bg-white/[0.02] px-4 py-2 text-xs text-neutral-300 md:self-auto">
-                <LuMic size={14} className="text-[#e5af3a]" />
-                VP · Department of ISE
-              </span>
-            </div>
-          </FadeUp>
-
-          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {leadershipPhotos.map((photo, idx) => (
-              <FadeUp key={idx} delay={0.1 + idx * 0.1}>
-                <div className="group overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] transition-all duration-300 hover:border-white/[0.18] hover:bg-white/[0.04]">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-black/40">
-                    <img
-                      src={photo.src}
-                      alt={photo.title}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                  </div>
-                  <div className="p-5 sm:p-6">
-                    <p className="font-editorial text-base font-medium text-white sm:text-lg">
-                      {photo.title}
-                    </p>
-                    <p className="mt-1.5 text-xs leading-relaxed text-neutral-400">
-                      {photo.subtitle}
-                    </p>
-                  </div>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
         </div>
 
       </div>
